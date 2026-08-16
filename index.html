@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600&family=DM+Serif+Display&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&family=Courier+Prime:wght@400;700&family=Archivo+Black&family=Outfit:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Bebas+Neue&family=Cormorant+Garamond:wght@500;600;700&family=Syne:wght@600;700;800&family=Lora:wght@400;600&family=Karla:wght@400;500;600&family=Manrope:wght@400;500;600&family=Instrument+Serif&family=IBM+Plex+Mono:wght@400;600&family=JetBrains+Mono:wght@400;600&family=EB+Garamond:wght@400;600;700&family=Crimson+Text:wght@400;600;700&family=Abril+Fatface&family=Sora:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&family=Bodoni+Moda:wght@400;600;700&family=Josefin+Sans:wght@400;600&family=DM+Sans:wght@400;500;600&family=Rubik:wght@400;500;600&family=Nunito+Sans:wght@400;600&family=Public+Sans:wght@400;500;600&family=Roboto+Mono:wght@400;600&family=DM+Mono:wght@400;500&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font-body);
+    font-size:var(--base-size);min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+
+  /* ---------- unified header ---------- */
+  .topbar{display:flex;align-items:center;gap:16px;padding:22px 24px;
+    border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:40}
+  .hdr-id{display:flex;align-items:center;gap:13px;min-width:0;flex:0 1 auto}
+  .hdr-pic{width:46px;height:46px;border-radius:50%;object-fit:cover;flex-shrink:0;
+    background:var(--line);cursor:pointer}
+  .hdr-txt{min-width:0}
+  .hdr-name{font-family:var(--font-display);font-weight:700;font-size:1.12em;line-height:1.2;
+    cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hdr-name em{color:var(--accent2);font-style:italic;font-weight:500}
+  .hdr-bio{font-size:.8em;color:var(--ink-soft);line-height:1.4;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;max-width:400px}
+  .hdr-socials{display:flex;gap:15px;align-items:center;flex-shrink:0;margin-left:auto}
+  .social-link{font-size:.72em;color:var(--ink-soft);cursor:pointer;white-space:nowrap;
+    position:relative;transition:color .18s ease}
+  .social-link::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;
+    background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+  .social-link:hover{color:var(--accent)}
+  .social-link:hover::after{transform:scaleX(1)}
+
+  /* centered variant */
+  .topbar.center{flex-direction:column;align-items:center;gap:11px;padding:26px 24px 20px;text-align:center}
+  .topbar.center .hdr-id{flex-direction:column;gap:8px;flex:none;text-align:center}
+  .topbar.center .hdr-pic{width:60px;height:60px}
+  .topbar.center .hdr-bio{max-width:440px;white-space:normal}
+  .topbar.center .hdr-name{white-space:normal}
+  .topbar.center .nav{justify-content:center;flex-wrap:wrap}
+  @media(max-width:640px){
+    .topbar{flex-wrap:wrap;gap:12px;padding:18px 16px}
+    .hdr-bio{white-space:normal;max-width:none}
+    .hdr-socials{gap:12px}
+    .nav{width:100%;justify-content:center;flex-wrap:wrap}
+  }
+
+  .nav{display:flex;gap:4px;align-items:center;flex-shrink:0;margin-left:22px}
+  .topbar.center .hdr-socials{margin-left:0}
+  .topbar.center .nav{margin-left:0}
+  .nav-item{position:relative}
+  .nav-link{font-family:var(--font-mono);font-size:.72em;letter-spacing:.06em;text-transform:uppercase;
+    padding:8px 12px;cursor:pointer;color:var(--ink-soft);border-radius:var(--radius-sm);white-space:nowrap;
+    display:flex;align-items:center;gap:5px;background:none;border:none}
+  .nav-link:hover,.nav-link.active{color:var(--ink);background:var(--accent-wash)}
+  .dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--card);min-width:190px;
+    border:1px solid var(--line);border-radius:var(--radius-sm);box-shadow:var(--shadow-hover);
+    padding:6px;display:none;z-index:50}
+  .dropdown.open{display:block}
+  .dropdown a{display:block;padding:8px 11px;font-size:.82em;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .dropdown a:hover{background:var(--accent-wash);color:var(--accent)}
+  .dropdown .dd-head{font-family:var(--font-mono);font-size:.62em;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--ink-soft);padding:7px 11px 4px}
+
+  .pill{font-family:var(--font-mono);font-size:.68em;letter-spacing:.04em;text-transform:uppercase;
+    border:1px solid var(--ink);padding:6px 11px;cursor:pointer;background:none;color:var(--ink);
+    border-radius:var(--radius-sm);white-space:nowrap}
+  .pill:hover{background:var(--ink);color:var(--paper)}
+  .pill.solid{background:var(--ink);color:var(--paper)}
+  .pill.solid:hover{background:var(--accent)}
+
+  /* icon button (copy link) */
+  .icon-btn{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);background:var(--card);border-radius:50%;cursor:pointer;color:var(--ink-soft);
+    transition:all .18s ease;flex-shrink:0}
+  .icon-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-wash)}
+  .icon-btn svg{width:15px;height:15px}
+
+  .disc-chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:.68em;
+    letter-spacing:.03em;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    padding:6px 12px;border-radius:99px;cursor:pointer;white-space:nowrap;transition:all .18s ease}
+  .disc-chip:hover{border-color:var(--accent);color:var(--accent)}
+  .disc-chip .q{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;
+    border-radius:50%;background:var(--ink-soft);color:var(--paper);font-size:.62em;font-weight:700}
+  .disc-chip:hover .q{background:var(--accent)}
+
+  main{max-width:1180px;margin:0 auto;padding:26px 22px 70px}
+
+  /* ---------- category cards (amazon-storefront style) ---------- */
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+  .cat-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+    cursor:pointer;border:var(--card-border);transition:transform .18s ease,box-shadow .18s ease}
+  .cat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .cat-collage{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+    gap:2px;aspect-ratio:1/1;background:var(--line)}
+  .cat-collage.one{grid-template-columns:1fr;grid-template-rows:1fr}
+  .cat-collage.two{grid-template-columns:1fr 1fr;grid-template-rows:1fr}
+  .cat-collage img{width:100%;height:100%;object-fit:cover;display:block;background:var(--line)}
+  .cat-card .body{padding:13px 15px 16px}
+  .cat-card h3{font-family:var(--font-display);font-weight:600;font-size:1em;margin:0 0 4px;line-height:1.25}
+  .cat-card .count{font-family:var(--font-mono);font-size:.66em;color:var(--ink-soft)}
+
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+    margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .section-head h2{font-family:var(--font-display);font-weight:600;font-size:1.15em;margin:0}
+  .section-head .count{font-family:var(--font-mono);font-size:.68em;color:var(--ink-soft)}
+
+  /* ---------- collections grid ---------- */
+  .masonry{column-count:4;column-gap:18px}
+  @media(max-width:1000px){.masonry{column-count:3}}
+  @media(max-width:720px){.masonry{column-count:2}}
+  @media(max-width:440px){.masonry{column-count:1}}
+  .collection-card{break-inside:avoid;margin-bottom:18px;background:var(--card);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);display:block;cursor:pointer;border:var(--card-border);
+    transition:transform .18s ease,box-shadow .18s ease}
+  .collection-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .collection-card img{width:100%;display:block;object-fit:cover;background:var(--line)}
+  .collection-card .body{padding:12px 14px 15px}
+  .collection-card h3{font-family:var(--font-display);font-weight:600;font-size:.98em;line-height:1.25;margin:0 0 5px}
+  .meta{font-family:var(--font-mono);font-size:.66em;color:var(--ink-soft);display:flex;gap:12px}
+
+  .back-link{display:inline-block;font-family:var(--font-mono);font-size:.7em;text-transform:uppercase;
+    letter-spacing:.05em;margin-bottom:18px;cursor:pointer;color:var(--ink-soft)}
+  .back-link:hover{color:var(--accent)}
+
+  /* ---------- collection page: compact hero, big products ---------- */
+  .collection-hero{display:grid;grid-template-columns:170px 1fr;gap:20px;background:var(--card);
+    border-radius:var(--radius);padding:16px 18px;margin-bottom:22px;box-shadow:var(--shadow);
+    border:var(--card-border);align-items:center}
+  @media(max-width:600px){.collection-hero{grid-template-columns:120px 1fr;gap:14px;padding:14px}}
+  .collection-hero img{width:100%;border-radius:var(--radius-sm);object-fit:cover;
+    aspect-ratio:1/1;background:var(--line)}
+  .collection-hero h1{font-family:var(--font-display);font-weight:700;font-size:1.35em;margin:0 0 6px;line-height:1.1}
+  .collection-hero .desc{color:var(--ink-soft);font-size:.84em;line-height:1.5;margin:0 0 10px}
+  .share-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+  .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+  @media(max-width:640px){.product-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}}
+  .product-card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+    display:block;cursor:pointer;border:var(--card-border);transition:transform .18s ease,box-shadow .18s ease}
+  .product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .product-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--line)}
+  .product-card .body{padding:12px 14px 16px}
+  .product-card h4{font-family:var(--font-display);font-size:.92em;font-weight:600;margin:0 0 4px;line-height:1.3}
+  .product-card .price{font-family:var(--font-mono);font-size:.74em;color:var(--accent)}
+  .product-card .cat{font-family:var(--font-mono);font-size:.62em;color:var(--ink-soft);
+    text-transform:uppercase;letter-spacing:.05em;margin-top:5px;display:block}
+
+  /* ---------- product page ---------- */
+  .product-hero{display:grid;grid-template-columns:400px 1fr;gap:34px;background:var(--card);
+    border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);max-width:900px;margin:0 auto;border:var(--card-border)}
+  @media(max-width:700px){.product-hero{grid-template-columns:1fr;padding:20px}}
+  .product-hero img{width:100%;border-radius:var(--radius-sm);object-fit:cover;aspect-ratio:1/1;background:var(--line)}
+  .product-hero h1{font-family:var(--font-display);font-weight:700;font-size:1.55em;margin:0 0 8px;line-height:1.1}
+  .product-hero .price{font-family:var(--font-mono);color:var(--accent);font-size:1em;display:block;margin-bottom:12px}
+  .product-hero .desc{color:var(--ink-soft);font-size:.88em;line-height:1.6;margin-bottom:18px}
+  .shop-btn{display:inline-block;font-family:var(--font-mono);font-size:.78em;text-transform:uppercase;
+    letter-spacing:.05em;background:var(--ink);color:var(--paper);padding:12px 22px;
+    border-radius:var(--radius-sm);transition:background .2s ease}
+  .shop-btn:hover{background:var(--accent)}
+  .see-full{display:block;margin-top:14px;font-size:.76em;color:var(--accent2);text-decoration:underline;cursor:pointer}
+
+  footer{max-width:720px;margin:50px auto 0;padding:0 22px 30px;text-align:center}
+
+  .overlay{position:fixed;inset:0;background:rgba(20,16,12,.55);display:none;align-items:center;
+    justify-content:center;padding:18px;z-index:200}
+  .overlay.open{display:flex}
+  .modal{background:var(--paper);max-width:480px;width:100%;padding:28px;border-radius:var(--radius);
+    position:relative;max-height:85vh;overflow:auto}
+  .modal h3{font-family:var(--font-display);margin:0 0 12px;font-size:1.15em}
+  .modal p{font-size:.85em;line-height:1.65;color:var(--ink-soft);margin:0 0 12px}
+  .modal-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.05em;cursor:pointer;color:var(--ink)}
+
+  /* ================= EDITOR ================= */
+  .editor-wrap{max-width:1000px;margin:0 auto}
+  .ed-tabs{display:flex;gap:6px;margin-bottom:22px;flex-wrap:wrap}
+  .ed-tab{font-family:var(--font-mono);font-size:.72em;text-transform:uppercase;letter-spacing:.05em;
+    padding:9px 15px;border:1px solid var(--ink);background:none;cursor:pointer;color:var(--ink);border-radius:var(--radius-sm)}
+  .ed-tab.active{background:var(--ink);color:var(--paper)}
+  .ed-panel{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);
+    margin-bottom:18px;border:var(--card-border)}
+  .ed-panel h3{font-family:var(--font-display);font-size:1.05em;margin:0 0 4px}
+  .ed-panel .hint{font-size:.78em;color:var(--ink-soft);margin:0 0 16px;line-height:1.55}
+
+  .field{margin-bottom:14px}
+  .field label{display:block;font-family:var(--font-mono);font-size:.66em;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink-soft);margin-bottom:5px}
+  .field input[type=text],.field input[type=password],.field textarea,.field select{
+    width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+    font-family:var(--font-body);font-size:.86em;background:#fff;color:#221D17}
+  .field textarea{min-height:70px;resize:vertical}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:600px){.row2{grid-template-columns:1fr}}
+
+  .btn{font-family:var(--font-mono);font-size:.72em;text-transform:uppercase;letter-spacing:.04em;
+    padding:9px 15px;border:none;border-radius:var(--radius-sm);cursor:pointer;background:var(--ink);color:var(--paper)}
+  .btn:hover{background:var(--accent)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn.ghost{background:none;border:1px solid var(--ink);color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+  .btn.danger{background:none;border:1px solid #A33;color:#A33}
+  .btn.danger:hover{background:#A33;color:#fff}
+  .btn.small{padding:6px 10px;font-size:.66em}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+  /* image dropzone */
+  .dropzone{border:2px dashed var(--line);border-radius:10px;padding:16px;text-align:center;
+    cursor:pointer;transition:all .18s ease;background:var(--paper)}
+  .dropzone:hover,.dropzone.over{border-color:var(--accent);background:var(--accent-wash)}
+  .dropzone p{margin:0;font-size:.76em;color:var(--ink-soft);line-height:1.5}
+  .dropzone strong{color:var(--ink)}
+  .img-row{display:flex;gap:12px;align-items:flex-start}
+  .img-row .preview{width:74px;height:74px;object-fit:cover;border-radius:8px;
+    border:1px solid var(--line);background:var(--line);flex-shrink:0}
+  .img-row .dz-wrap{flex:1;min-width:0}
+
+  .look-list{display:flex;flex-direction:column;gap:10px}
+  .look-row{display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);
+    border-radius:12px;padding:12px 14px;cursor:grab;transition:border-color .15s ease,box-shadow .15s ease}
+  .look-row:hover{border-color:var(--accent)}
+  .look-row.dragging{opacity:.35}
+  .look-row.drag-over{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-wash)}
+  .grip{font-size:1.1em;color:var(--ink-soft);line-height:1;user-select:none;cursor:grab}
+  .look-row img{width:52px;height:52px;object-fit:cover;border-radius:6px;background:var(--line);flex-shrink:0}
+  .look-row .info{flex:1;min-width:0}
+  .look-row .info strong{font-family:var(--font-display);font-size:.95em;display:block;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .look-row .info span{font-family:var(--font-mono);font-size:.66em;color:var(--ink-soft)}
+  .look-row .acts{display:flex;gap:6px;flex-shrink:0}
+
+  .item-block{border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px;background:var(--paper)}
+  .item-block-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+  .item-block-head strong{font-family:var(--font-display);font-size:.95em}
+
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .swatch{cursor:pointer;border:2px solid transparent;border-radius:10px;padding:10px;text-align:left;background:#fff}
+  .swatch.active{border-color:var(--ink)}
+  .swatch .bars{display:flex;gap:4px;margin-bottom:8px}
+  .swatch .bars i{width:100%;height:26px;border-radius:4px;display:block}
+  .swatch span{font-family:var(--font-mono);font-size:.66em;text-transform:uppercase;letter-spacing:.04em;color:#221D17}
+  .color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+  .color-field{display:flex;align-items:center;gap:8px}
+  .color-field input[type=color]{width:38px;height:34px;border:1px solid var(--line);border-radius:6px;padding:2px;background:#fff;cursor:pointer}
+  .color-field label{font-family:var(--font-mono);font-size:.62em;text-transform:uppercase;color:var(--ink-soft)}
+  .font-preview{font-size:1.15em;margin-top:6px;padding:10px 12px;background:var(--paper);
+    border-radius:8px;border:1px solid var(--line)}
+
+  .save-bar{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);
+    padding:14px 22px;display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;z-index:25}
+  .save-status{font-family:var(--font-mono);font-size:.66em;color:var(--ink-soft)}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+  .dot.green{background:#3A7D44}.dot.amber{background:#C8952E}.dot.grey{background:#999}
+
+  .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);
+    padding:11px 20px;border-radius:8px;font-family:var(--font-mono);font-size:.72em;opacity:0;
+    pointer-events:none;transition:opacity .25s ease;z-index:300;max-width:90vw;text-align:center}
+  .toast.show{opacity:1}
+
+  .link-preview{font-family:var(--font-mono);font-size:.66em;color:var(--accent2);word-break:break-all;margin-top:4px}
+  .callout{background:var(--accent-wash);border-left:3px solid var(--accent);padding:12px 14px;
+    border-radius:6px;font-size:.78em;line-height:1.6;color:var(--ink-soft);margin-bottom:14px}
+  .callout strong{color:var(--ink)}
+  ol.steps{font-size:.8em;line-height:1.7;color:var(--ink-soft);padding-left:20px;margin:0 0 14px}
+  ol.steps strong{color:var(--ink)}
+  code{font-family:var(--font-mono);font-size:.8em;background:var(--accent-wash);padding:2px 5px;border-radius:4px}
+
+  .empty{text-align:center;color:var(--ink-soft);font-size:.85em;padding:40px 0}
+  .cat-row{display:flex;flex-direction:column;gap:8px}
+  .cat-item{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);
+    border-radius:10px;padding:10px 12px;cursor:grab}
+  .cat-item.dragging{opacity:.35}
+  .cat-item.drag-over{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-wash)}
+  .cat-item input{flex:1;padding:8px 10px;border:1px solid var(--line);border-radius:7px;
+    font-family:var(--font-body);font-size:.86em;background:#fff;color:#221D17;min-width:0}
+  .range-val{font-family:var(--font-mono);font-size:.72em;color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar"></div>
+
+<main id="app"></main>
+<footer><span class="disc-chip" onclick="openModal()">Affiliate Disclaimer <span class="q">?</span></span></footer>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Affiliate Disclaimer</h3>
+    <p id="modalText"></p>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   ===DATA_START===
+   ========================================================= */
+const DEFAULT_SITE = {
+  siteName: "shop",
+  headerAlign: "left",
+  categories: ["Clothing","Shoes","Accessories","Beauty & Health","Home","Tech","Media","Other"],
+  profile: {
+    name: "Your Name",
+    bio: "fashion + lifestyle. everything i post, linked.",
+    pic: "",
+    socials: [
+      { label:"Pinterest", url:"https://pinterest.com/yourprofile" },
+      { label:"eBay Store", url:"https://ebay.com/usr/yourstore" }
+    ]
+  },
+  tagline: "shop my collections",
+  intro: "everything i've posted, linked and organized.",
+  disclosure: "Some links on this site are affiliate links through the Amazon Associates Program and the eBay Partner Network. If you click one and make a purchase, I may earn a small commission — at no additional cost to you. I only link items I've actually worn or would wear myself.",
+  publish: { owner:"", repo:"", branch:"main", path:"data.json" },
+  theme: {
+    preset:"thrift", paper:"#ECE4D3", ink:"#221D17", card:"#FFFFFF",
+    accent:"#9C3B2A", accent2:"#5C6640",
+    fontDisplay:"Fraunces", fontBody:"Work Sans", fontMono:"Space Mono",
+    baseSize:16, radius:18, cardStyle:"soft"
+  },
+  collections: [
+    {
+      id:"earthy-boho",
+      title:"shop this look: earthy boho outfit",
+      cover:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&q=80",
+      description:"off-shoulder crochet top, denim shorts, woven crossbody, layered pendant necklace.",
+      products:[
+        { id:"gold-pendant", name:"Large Gold Pendant Necklace", price:"$18", category:"Accessories",
+          image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&q=80",
+          description:"oversized oval pendant on a long cord.",
+          link:"https://www.amazon.com/YOUR-LINK-HERE" },
+        { id:"woven-bag", name:"Woven Shoulder Bag", price:"$48", category:"Accessories",
+          image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80",
+          description:"braided leather-look shoulder bag, structured but slouchy.",
+          link:"https://www.ebay.com/YOUR-LINK-HERE" }
+      ]
+    },
+    {
+      id:"2000s-skater",
+      title:"shop this look: 2000s skater outfit",
+      cover:"https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=80",
+      description:"camo cargo shorts, fitted tank, studded belt stack, chunky sneakers.",
+      products:[
+        { id:"studded-belt", name:"Pyramid Studded Belt", price:"$18", category:"Accessories",
+          image:"https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=600&q=80",
+          description:"classic pyramid-stud belt in black leather.",
+          link:"https://www.ebay.com/YOUR-LINK-HERE" }
+      ]
+    }
+  ]
+};
+/* ===DATA_END=== */
+
+function cats(){ return (SITE.categories&&SITE.categories.length)?SITE.categories:["Other"]; }
+
+const PRESETS = {
+  /* ---- light ---- */
+  thrift:{label:"thrift paper",paper:"#ECE4D3",ink:"#3B2E22",card:"#FBF7EE",accent:"#A5674A",accent2:"#75784A"},
+  dustyrose:{label:"dusty rose",paper:"#F2E7E5",ink:"#3A2830",card:"#FCF6F5",accent:"#B07480",accent2:"#7089A0"},
+  seaglass:{label:"sea glass",paper:"#E2ECEA",ink:"#1D3634",card:"#F5FAF9",accent:"#4E8A84",accent2:"#C08272"},
+  oat:{label:"oat",paper:"#EFE8DC",ink:"#35291C",card:"#FBF8F2",accent:"#B0824A",accent2:"#6C8194"},
+  periwinkle:{label:"periwinkle",paper:"#E6E8F3",ink:"#2A2C45",card:"#F7F8FC",accent:"#6E76B0",accent2:"#C08E6A"},
+  lilac:{label:"lilac",paper:"#EDE6EF",ink:"#322640",card:"#FAF6FB",accent:"#8266A0",accent2:"#6E9490"},
+  fog:{label:"fog",paper:"#E8EAEA",ink:"#232A30",card:"#F8F9F9",accent:"#5F7C8A",accent2:"#A08894"},
+  apricot:{label:"apricot",paper:"#F5E7DC",ink:"#3A2618",card:"#FDF7F1",accent:"#BC7048",accent2:"#4E7C78"},
+  honeydew:{label:"honeydew",paper:"#E4EDE4",ink:"#1E3226",card:"#F6FAF6",accent:"#578A64",accent2:"#8E6480"},
+  buttercream:{label:"buttercream",paper:"#F3ECD9",ink:"#35301C",card:"#FCF9EF",accent:"#A88C42",accent2:"#B07C86"},
+
+  /* ---- dark ---- */
+  plum:{label:"plum",paper:"#2B2130",ink:"#EFE6EE",card:"#382C3E",accent:"#C892A8",accent2:"#86B2A0"},
+  forest:{label:"forest",paper:"#1E2A21",ink:"#E6EDE2",card:"#28362B",accent:"#8FB088",accent2:"#D0A070"},
+  navy:{label:"navy",paper:"#1E2739",ink:"#E4EAF2",card:"#283248",accent:"#8AA8CC",accent2:"#D0A0A8"},
+  charcoal:{label:"charcoal",paper:"#282524",ink:"#EDE8E4",card:"#34302E",accent:"#C4989A",accent2:"#C8B080"},
+  wine:{label:"wine",paper:"#31222A",ink:"#F0E5E7",card:"#3E2C35",accent:"#CE96A0",accent2:"#9AB090"},
+  harbor:{label:"harbor",paper:"#212E33",ink:"#E5ECEE",card:"#2B3B41",accent:"#82B0AE",accent2:"#C8A882"},
+  espresso:{label:"espresso",paper:"#2A231D",ink:"#F0E8DE",card:"#372E27",accent:"#C89C6E",accent2:"#8CA4B8"},
+  ink:{label:"ink",paper:"#1F2130",ink:"#E7E8F0",card:"#2A2D3F",accent:"#A098CC",accent2:"#78AAA6"}
+};
+const FONT_DISPLAY=["Fraunces","DM Serif Display","Playfair Display","Bodoni Moda","EB Garamond",
+  "Crimson Text","Libre Baskerville","Cormorant Garamond","Instrument Serif","Lora","Abril Fatface",
+  "Archivo Black","Bebas Neue","Syne","Sora","Space Grotesk","Josefin Sans","Outfit"];
+const FONT_BODY=["Work Sans","Inter","Outfit","Karla","Manrope","DM Sans","Rubik","Nunito Sans",
+  "Public Sans","Josefin Sans","Lora","EB Garamond","Libre Baskerville"];
+const FONT_MONO=["Space Mono","Courier Prime","IBM Plex Mono","JetBrains Mono","Roboto Mono",
+  "DM Mono","Fira Mono","Space Grotesk"];
+
+const DRAFT_KEY="shopSite_draft_v3";
+const TOKEN_KEY="shopSite_token";
+let SITE=structuredClone(DEFAULT_SITE);
+let dirty=false, ddOpen=null;
+
+async function boot(){
+  try{ const r=await fetch('data.json?t='+Date.now());
+    if(r.ok) SITE=deepMerge(structuredClone(DEFAULT_SITE),await r.json()); }catch(e){}
+  try{ const d=localStorage.getItem(DRAFT_KEY);
+    if(d){ SITE=deepMerge(SITE,JSON.parse(d)); dirty=true; } }catch(e){}
+  applyTheme(); renderNav(); router();
+}
+function deepMerge(b,o){for(const k in o){
+  if(o[k]&&typeof o[k]==="object"&&!Array.isArray(o[k])&&b[k])deepMerge(b[k],o[k]);else b[k]=o[k];}return b;}
+function saveDraft(){dirty=true;try{localStorage.setItem(DRAFT_KEY,JSON.stringify(SITE));}catch(e){}updateStatus();}
+function getToken(){try{return localStorage.getItem(TOKEN_KEY)||"";}catch(e){return "";}}
+function setToken(t){try{t?localStorage.setItem(TOKEN_KEY,t):localStorage.removeItem(TOKEN_KEY);}catch(e){}}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');
+  clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),2800);}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function navigate(h){window.location.hash=h;closeDD();}
+
+function applyTheme(){
+  const t=SITE.theme,r=document.documentElement.style;
+  r.setProperty('--paper',t.paper);r.setProperty('--ink',t.ink);r.setProperty('--card',t.card);
+  r.setProperty('--accent',t.accent);r.setProperty('--accent2',t.accent2);
+  r.setProperty('--ink-soft',hexAlpha(t.ink,.66));r.setProperty('--line',hexAlpha(t.ink,.14));
+  r.setProperty('--accent-wash',hexAlpha(t.accent,.10));
+  r.setProperty('--font-display',`'${t.fontDisplay}', serif`);
+  r.setProperty('--font-body',`'${t.fontBody}', sans-serif`);
+  r.setProperty('--font-mono',`'${t.fontMono}', monospace`);
+  r.setProperty('--base-size',(t.baseSize||16)+'px');
+  r.setProperty('--radius',t.radius+'px');
+  r.setProperty('--radius-sm',Math.max(4,Math.round(t.radius*.45))+'px');
+  const S={soft:{s:'0 6px 18px '+hexAlpha(t.ink,.14),h:'0 14px 26px '+hexAlpha(t.ink,.20),b:'none'},
+    flat:{s:'none',h:'none',b:'1px solid '+hexAlpha(t.ink,.18)},
+    hard:{s:'4px 4px 0 '+t.ink,h:'6px 6px 0 '+t.accent,b:'1.5px solid '+t.ink},
+    lifted:{s:'0 12px 30px '+hexAlpha(t.ink,.22),h:'0 20px 40px '+hexAlpha(t.ink,.28),b:'none'}};
+  const st=S[t.cardStyle]||S.soft;
+  r.setProperty('--shadow',st.s);r.setProperty('--shadow-hover',st.h);r.setProperty('--card-border',st.b);
+  document.getElementById('modalText').textContent=SITE.disclosure;
+  document.title=(SITE.profile&&SITE.profile.name)||SITE.siteName;
+}
+function hexAlpha(hex,a){const h=(hex||'#000').replace('#','');
+  const n=h.length===3?h.split('').map(c=>c+c).join(''):h;
+  return `rgba(${parseInt(n.slice(0,2),16)},${parseInt(n.slice(2,4),16)},${parseInt(n.slice(4,6),16)},${a})`;}
+
+function openModal(){document.getElementById('overlay').classList.add('open');}
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')closeModal();});
+
+const LINK_ICON=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg>`;
+const CHIP=`<span class="disc-chip" onclick="openModal()">Affiliate Disclaimer <span class="q">?</span></span>`;
+
+/* ---------- unified header ---------- */
+function usedCategories(){
+  const s=new Set();
+  SITE.collections.forEach(c=>c.products.forEach(p=>{ if(p.category) s.add(p.category); }));
+  return cats().filter(c=>s.has(c));
+}
+function renderNav(){
+  const used=usedCategories(), p=SITE.profile||{};
+  const bar=document.getElementById('topbar');
+  bar.className='topbar'+(SITE.headerAlign==='center'?' center':'');
+  bar.innerHTML=`
+    <div class="hdr-id">
+      ${p.pic?`<img class="hdr-pic" src="${esc(p.pic)}" alt="" onclick="navigate('#/')">`:''}
+      <div class="hdr-txt">
+        <div class="hdr-name" onclick="navigate('#/')">${esc(p.name||SITE.siteName).replace(/\s(\S+)$/,' <em>$1</em>')}</div>
+        ${p.bio?`<div class="hdr-bio">${esc(p.bio)}</div>`:''}
+      </div>
+    </div>
+    ${(p.socials||[]).filter(s=>s.label&&s.url).length?
+      `<div class="hdr-socials">${(p.socials||[]).filter(s=>s.label&&s.url).map(s=>
+        `<a class="social-link" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')}</div>`:''}
+    <div class="nav">
+      <div class="nav-item"><button class="nav-link" onclick="navigate('#/')">Collections</button></div>
+      <div class="nav-item">
+        <button class="nav-link" onclick="toggleDD(event)">Shop All ▾</button>
+        <div class="dropdown" id="shopDD">
+          <a onclick="navigate('#/shop')">Everything</a>
+          ${used.length?`<div class="dd-head">By Category</div>`:''}
+          ${used.map(c=>`<a onclick="navigate('#/shop/${encodeURIComponent(c)}')">${esc(c)}</a>`).join('')}
+        </div>
+      </div>
+      <button class="pill solid" onclick="navigate('#/edit')">edit</button>
+    </div>`;
+}
+function toggleDD(e){e.stopPropagation();const d=document.getElementById('shopDD');
+  d.classList.toggle('open');ddOpen=d.classList.contains('open')?d:null;}
+function closeDD(){const d=document.getElementById('shopDD');if(d)d.classList.remove('open');ddOpen=null;}
+document.addEventListener('click',()=>{if(ddOpen)closeDD();});
+
+/* ---------- public views ---------- */
+function renderHome(){
+  document.getElementById('app').innerHTML=`
+    <div class="section-head">
+      <h2>${esc(SITE.tagline)}</h2>
+      <span class="count">${SITE.collections.length} collection${SITE.collections.length===1?'':'s'}</span>
+    </div>
+    <div class="masonry">
+      ${SITE.collections.map(c=>`
+        <div class="collection-card" onclick="navigate('#/collection/${c.id}')">
+          <img src="${esc(c.cover)}" alt="${esc(c.title)}" onerror="this.style.aspectRatio='4/5'">
+          <div class="body"><h3>${esc(c.title)}</h3>
+            <div class="meta"><span>${c.products.length} product${c.products.length===1?'':'s'}</span></div></div>
+        </div>`).join('')||'<p class="empty">no collections yet.</p>'}
+    </div>`;
+}
+
+function allProducts(){
+  const out=[];
+  SITE.collections.forEach(c=>c.products.forEach(p=>out.push({...p,_cid:c.id,_ctitle:c.title})));
+  return out;
+}
+function groupByCategory(){
+  const g={};
+  allProducts().forEach(p=>{const k=p.category||"Other";(g[k]=g[k]||[]).push(p);});
+  return g;
+}
+function collageHTML(items){
+  const imgs=items.slice(0,4).map(p=>`<img src="${esc(p.image)}" alt="" onerror="this.style.opacity=.15">`);
+  const cls=imgs.length===1?'one':imgs.length===2?'two':'';
+  return `<div class="cat-collage ${cls}">${imgs.join('')}</div>`;
+}
+function renderShop(filterCat){
+  const g=groupByCategory();
+  const order=cats().filter(c=>g[c]);
+
+  /* category landing — horizontal grid of category cards */
+  if(!filterCat){
+    document.getElementById('app').innerHTML=`
+      <div class="section-head">
+        <h2>Shop All</h2>
+        <span class="count">${allProducts().length} items</span>
+      </div>
+      <div class="cat-grid">
+        ${order.map(c=>`
+          <div class="cat-card" onclick="navigate('#/shop/${encodeURIComponent(c)}')">
+            ${collageHTML(g[c])}
+            <div class="body"><h3>${esc(c)}</h3>
+              <div class="count">${g[c].length} item${g[c].length===1?'':'s'}</div></div>
+          </div>`).join('')||'<p class="empty">no products categorized yet.</p>'}
+      </div>`;
+    return;
+  }
+
+  /* single category — its products */
+  const items=g[filterCat]||[];
+  document.getElementById('app').innerHTML=`
+    <div class="back-link" onclick="navigate('#/shop')">← all categories</div>
+    <div class="section-head">
+      <h2>${esc(filterCat)}</h2>
+      <span class="count">${items.length} item${items.length===1?'':'s'}</span>
+    </div>
+    <div class="product-grid">
+      ${items.map(p=>`
+        <div class="product-card" onclick="navigate('#/product/${p._cid}/${p.id}')">
+          <img src="${esc(p.image)}" alt="${esc(p.name)}">
+          <div class="body"><h4>${esc(p.name)}</h4>
+            <div class="price">${esc(p.price)}</div></div>
+        </div>`).join('')||'<p class="empty">nothing in this category yet.</p>'}
+    </div>`;
+}
+
+function renderCollection(id){
+  const c=SITE.collections.find(x=>x.id===id);
+  if(!c){notFound();return;}
+  document.getElementById('app').innerHTML=`
+    <div class="back-link" onclick="navigate('#/')">← all collections</div>
+    <div class="collection-hero">
+      <img src="${esc(c.cover)}" alt="${esc(c.title)}">
+      <div>
+        <h1>${esc(c.title)}</h1>
+        <p class="desc">${esc(c.description)}</p>
+        <div class="share-row">
+          <span class="meta">${c.products.length} product${c.products.length===1?'':'s'}</span>
+          <button class="icon-btn" title="copy link to this collection"
+            onclick="copyLink('#/collection/${c.id}')">${LINK_ICON}</button>
+          ${CHIP}
+        </div>
+      </div>
+    </div>
+    <div class="product-grid">
+      ${c.products.map(p=>`
+        <div class="product-card" onclick="navigate('#/product/${c.id}/${p.id}')">
+          <img src="${esc(p.image)}" alt="${esc(p.name)}">
+          <div class="body"><h4>${esc(p.name)}</h4><div class="price">${esc(p.price)}</div>
+            ${p.category?`<span class="cat">${esc(p.category)}</span>`:''}</div>
+        </div>`).join('')||'<p class="empty">no products in this collection yet.</p>'}
+    </div>`;
+}
+function renderProduct(cid,pid){
+  const c=SITE.collections.find(x=>x.id===cid);
+  const p=c&&c.products.find(x=>x.id===pid);
+  if(!p){notFound();return;}
+  document.getElementById('app').innerHTML=`
+    <div class="back-link" onclick="navigate('#/collection/${c.id}')">← back to ${esc(c.title)}</div>
+    <div class="product-hero">
+      <img src="${esc(p.image)}" alt="${esc(p.name)}">
+      <div>
+        <h1>${esc(p.name)}</h1>
+        <span class="price">${esc(p.price)}${p.category?` · ${esc(p.category)}`:''}</span>
+        <p class="desc">${esc(p.description)}</p>
+        <a class="shop-btn" href="${esc(p.link)}" target="_blank" rel="noopener sponsored nofollow">shop this item →</a>
+        <div class="share-row" style="margin-top:14px">
+          <button class="icon-btn" title="copy link to this product"
+            onclick="copyLink('#/product/${c.id}/${p.id}')">${LINK_ICON}</button>
+          ${CHIP}
+        </div>
+        <span class="see-full" onclick="navigate('#/collection/${c.id}')">see the full collection this is from</span>
+      </div>
+    </div>`;
+}
+function notFound(){document.getElementById('app').innerHTML=
+  `<p class="empty">Not found. <a onclick="navigate('#/')" style="cursor:pointer;text-decoration:underline">Go home</a></p>`;}
+function copyLink(hash){
+  const url=location.origin+location.pathname+hash;
+  navigator.clipboard.writeText(url).then(()=>toast('link copied')).catch(()=>toast(url));
+}
+
+/* ================= IMAGE UPLOAD ================= */
+function compress(file,maxW){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        const scale=Math.min(1,maxW/img.width);
+        const cv=document.createElement('canvas');
+        cv.width=Math.round(img.width*scale); cv.height=Math.round(img.height*scale);
+        cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+        res(cv.toDataURL('image/jpeg',0.82));
+      };
+      img.onerror=()=>rej(new Error('bad image'));
+      img.src=r.result;
+    };
+    r.onerror=()=>rej(new Error('read failed'));
+    r.readAsDataURL(file);
+  });
+}
+async function handleImage(file,setPath,maxW){
+  if(!file||!file.type.startsWith('image/')){toast('that file isn\'t an image');return;}
+  toast('processing image...');
+  let dataUrl;
+  try{ dataUrl=await compress(file,maxW||1000); }
+  catch(e){ toast('could not read that image'); return; }
+
+  const {owner,repo,branch}=SITE.publish, tok=getToken();
+  if(owner&&repo&&tok){
+    try{
+      const name=`img-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,7)}.jpg`;
+      const path=`images/${name}`;
+      const b64=dataUrl.split(',')[1];
+      const res=await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`,{
+        method:'PUT',
+        headers:{Authorization:`Bearer ${tok}`,Accept:'application/vnd.github+json','Content-Type':'application/json'},
+        body:JSON.stringify({message:`add image ${name}`,content:b64,branch})
+      });
+      if(res.ok){ setPath(path); toast('image uploaded'); return; }
+      toast('upload failed — storing locally instead');
+    }catch(e){ toast('upload failed — storing locally instead'); }
+  }
+  setPath(dataUrl);
+  toast(owner&&repo&&tok?'stored in page':'image added (connect publishing to store properly)');
+}
+function dropzoneHTML(id,hintText){
+  return `<div class="dropzone" id="dz-${id}"
+      onclick="document.getElementById('fi-${id}').click()"
+      ondragover="event.preventDefault();this.classList.add('over')"
+      ondragleave="this.classList.remove('over')"
+      ondrop="dzDrop(event,'${id}')">
+      <p><strong>drop an image here</strong> or click to choose<br>${hintText||''}</p>
+    </div>
+    <input type="file" id="fi-${id}" accept="image/*" style="display:none" onchange="dzPick(event,'${id}')">`;
+}
+const DZ_HANDLERS={};
+function dzDrop(e,id){e.preventDefault();
+  const dz=document.getElementById('dz-'+id); if(dz)dz.classList.remove('over');
+  const f=e.dataTransfer.files[0]; if(f&&DZ_HANDLERS[id])DZ_HANDLERS[id](f);}
+function dzPick(e,id){const f=e.target.files[0];if(f&&DZ_HANDLERS[id])DZ_HANDLERS[id](f);}
+
+/* ================= EDITOR ================= */
+function edShell(tab,body){
+  return `<div class="editor-wrap">
+      <div class="ed-tabs">
+        <button class="ed-tab ${tab==='collections'?'active':''}" onclick="navigate('#/edit')">collections</button>
+        <button class="ed-tab ${tab==='profile'?'active':''}" onclick="navigate('#/edit/profile')">profile & links</button>
+        <button class="ed-tab ${tab==='design'?'active':''}" onclick="navigate('#/edit/design')">colors & fonts</button>
+        <button class="ed-tab ${tab==='text'?'active':''}" onclick="navigate('#/edit/text')">site text</button>
+        <button class="ed-tab ${tab==='publish'?'active':''}" onclick="navigate('#/edit/publish')">publish</button>
+        <button class="ed-tab" onclick="navigate('#/')">← view site</button>
+      </div>${body}</div>
+    <div class="save-bar">
+      <span class="save-status" id="saveStatus"></span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost" onclick="downloadBackup()">backup</button>
+        <button class="btn" id="pubBtn" onclick="publish()">publish changes</button>
+      </div></div>`;
+}
+function updateStatus(){
+  const el=document.getElementById('saveStatus');if(!el)return;
+  const c=SITE.publish;
+  if(!c.owner||!c.repo){el.innerHTML=`<span class="dot grey"></span>draft saved locally — connect publishing to go live`;return;}
+  el.innerHTML=dirty?`<span class="dot amber"></span>unpublished changes`
+                    :`<span class="dot green"></span>everything published`;
+}
+
+function renderEditCollections(){
+  document.getElementById('app').innerHTML=edShell('collections',`
+    <div class="ed-panel">
+      <h3>my collections</h3>
+      <p class="hint">drag the ⠿ handle to reorder — that's the order on your homepage. click one to edit it and its products.</p>
+      <button class="btn" onclick="addCollection()">+ add a collection</button>
+    </div>
+    <div class="ed-panel">
+      <div class="look-list" id="lookList">
+        ${SITE.collections.map((c,i)=>`
+          <div class="look-row" draggable="true" data-i="${i}">
+            <span class="grip">⠿</span>
+            <img src="${esc(c.cover)}" onerror="this.style.opacity=.25">
+            <div class="info" onclick="navigate('#/edit/collection/${c.id}')" style="cursor:pointer">
+              <strong>${esc(c.title)||'(untitled)'}</strong>
+              <span>${c.products.length} product${c.products.length===1?'':'s'}</span>
+            </div>
+            <div class="acts">
+              <button class="btn ghost small" onclick="navigate('#/edit/collection/${c.id}')">edit</button>
+              <button class="btn danger small" onclick="deleteCollection(${i})">✕</button>
+            </div></div>`).join('')||'<p class="hint">no collections yet — add one above.</p>'}
+      </div></div>`);
+  wireDrag();updateStatus();
+}
+function wireDrag(){
+  const list=document.getElementById('lookList');if(!list)return;
+  let src=null;
+  list.querySelectorAll('.look-row').forEach(row=>{
+    row.addEventListener('dragstart',e=>{src=+row.dataset.i;row.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+    row.addEventListener('dragend',()=>{row.classList.remove('dragging');
+      list.querySelectorAll('.look-row').forEach(r=>r.classList.remove('drag-over'));});
+    row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('drag-over');});
+    row.addEventListener('dragleave',()=>row.classList.remove('drag-over'));
+    row.addEventListener('drop',e=>{e.preventDefault();
+      const t=+row.dataset.i; if(src===null||src===t)return;
+      const [m]=SITE.collections.splice(src,1);
+      SITE.collections.splice(t,0,m);
+      saveDraft();renderEditCollections();toast('order updated');});
+  });
+}
+
+function renderEditCollection(id){
+  const ci=SITE.collections.findIndex(c=>c.id===id);
+  if(ci===-1){notFound();return;}
+  const c=SITE.collections[ci];
+  DZ_HANDLERS['cover']=f=>handleImage(f,v=>{SITE.collections[ci].cover=v;saveDraft();renderEditCollection(id);},1200);
+  c.products.forEach((p,pi)=>{
+    DZ_HANDLERS['p'+pi]=f=>handleImage(f,v=>{SITE.collections[ci].products[pi].image=v;saveDraft();renderEditCollection(id);},900);
+  });
+
+  document.getElementById('app').innerHTML=edShell('collections',`
+    <div class="back-link" onclick="navigate('#/edit')">← all collections</div>
+    <div class="ed-panel">
+      <h3>collection details</h3>
+      <p class="hint">the cover should be the same image you posted on Pinterest, so people recognize it when they click through.</p>
+      <div class="field"><label>collection title</label>
+        <input type="text" value="${esc(c.title)}" oninput="upd('collections.${ci}.title',this.value)"></div>
+      <div class="field"><label>cover image</label>
+        <div class="img-row">
+          <img class="preview" src="${esc(c.cover)}" onerror="this.style.opacity=.2">
+          <div class="dz-wrap">${dropzoneHTML('cover','jpg or png — resized automatically')}</div>
+        </div>
+        <input type="text" style="margin-top:9px" value="${esc(c.cover)}"
+          oninput="upd('collections.${ci}.cover',this.value)" placeholder="...or paste an image url"></div>
+      <div class="field"><label>description</label>
+        <textarea oninput="upd('collections.${ci}.description',this.value)">${esc(c.description)}</textarea></div>
+      <div class="field"><label>shareable link</label>
+        <div class="link-preview">${location.origin+location.pathname}#/collection/${c.id}</div>
+        <div class="btn-row"><button class="btn ghost small" onclick="copyLink('#/collection/${c.id}')">copy link</button></div></div>
+    </div>
+    <div class="ed-panel">
+      <div class="item-block-head">
+        <h3 style="margin:0">products (${c.products.length})</h3>
+        <button class="btn small" onclick="addProduct(${ci})">+ add product</button></div>
+      ${c.products.map((p,pi)=>`
+        <div class="item-block">
+          <div class="item-block-head">
+            <strong>${esc(p.name)||'(untitled)'}</strong>
+            <div style="display:flex;gap:6px">
+              <button class="btn ghost small" onclick="moveProduct(${ci},${pi},-1)" ${pi===0?'disabled':''}>↑</button>
+              <button class="btn ghost small" onclick="moveProduct(${ci},${pi},1)" ${pi===c.products.length-1?'disabled':''}>↓</button>
+              <button class="btn danger small" onclick="deleteProduct(${ci},${pi})">✕</button></div></div>
+          <div class="row2">
+            <div class="field"><label>product name</label>
+              <input type="text" value="${esc(p.name)}" oninput="upd('collections.${ci}.products.${pi}.name',this.value)"></div>
+            <div class="field"><label>price</label>
+              <input type="text" value="${esc(p.price)}" oninput="upd('collections.${ci}.products.${pi}.price',this.value)" placeholder="$24"></div>
+          </div>
+          <div class="field"><label>category (groups it on your shop all page)</label>
+            <select onchange="upd('collections.${ci}.products.${pi}.category',this.value);renderNav()">
+              <option value="">— pick a category —</option>
+              ${cats().map(cat=>`<option ${p.category===cat?'selected':''}>${esc(cat)}</option>`).join('')}
+            </select></div>
+          <div class="field"><label>product image</label>
+            <div class="img-row">
+              <img class="preview" src="${esc(p.image)}" onerror="this.style.opacity=.2">
+              <div class="dz-wrap">${dropzoneHTML('p'+pi,'')}</div>
+            </div>
+            <input type="text" style="margin-top:9px" value="${esc(p.image)}"
+              oninput="upd('collections.${ci}.products.${pi}.image',this.value)" placeholder="...or paste an image url"></div>
+          <div class="field"><label>your affiliate link</label>
+            <input type="text" value="${esc(p.link)}" oninput="upd('collections.${ci}.products.${pi}.link',this.value)" placeholder="https://amzn.to/..."></div>
+          <div class="field"><label>description</label>
+            <textarea oninput="upd('collections.${ci}.products.${pi}.description',this.value)">${esc(p.description)}</textarea></div>
+          <div class="field"><label>direct link to this product</label>
+            <div class="link-preview">${location.origin+location.pathname}#/product/${c.id}/${p.id}</div>
+            <div class="btn-row"><button class="btn ghost small" onclick="copyLink('#/product/${c.id}/${p.id}')">copy link</button></div></div>
+        </div>`).join('')||'<p class="hint">no products yet.</p>'}
+    </div>`);
+  updateStatus();
+}
+
+/* ----- profile editor ----- */
+function renderEditProfile(){
+  DZ_HANDLERS['pic']=f=>handleImage(f,v=>{SITE.profile.pic=v;saveDraft();renderEditProfile();},400);
+  const p=SITE.profile;
+  document.getElementById('app').innerHTML=edShell('profile',`
+    <div class="ed-panel">
+      <h3>your profile</h3>
+      <p class="hint">this shows at the top of your homepage — photo, name, short bio, and links out to your other pages.</p>
+      <div class="field"><label>profile picture</label>
+        <div class="img-row">
+          <img class="preview" style="border-radius:50%" src="${esc(p.pic)}" onerror="this.style.opacity=.2">
+          <div class="dz-wrap">${dropzoneHTML('pic','square works best')}</div>
+        </div>
+        <input type="text" style="margin-top:9px" value="${esc(p.pic)}"
+          oninput="updProfile('pic',this.value)" placeholder="...or paste an image url"></div>
+      <div class="field"><label>display name</label>
+        <input type="text" value="${esc(p.name)}" oninput="updProfile('name',this.value)"></div>
+      <div class="field"><label>short bio</label>
+        <textarea oninput="updProfile('bio',this.value)" placeholder="one or two lines">${esc(p.bio)}</textarea></div>
+    </div>
+    <div class="ed-panel">
+      <div class="item-block-head">
+        <h3 style="margin:0">links (${(p.socials||[]).length})</h3>
+        <button class="btn small" onclick="addSocial()">+ add link</button></div>
+      <p class="hint">your Pinterest, eBay storefront, Instagram — anything you want people to find.</p>
+      ${(p.socials||[]).map((s,i)=>`
+        <div class="item-block">
+          <div class="row2">
+            <div class="field"><label>label</label>
+              <input type="text" value="${esc(s.label)}" oninput="updSocial(${i},'label',this.value)" placeholder="Pinterest"></div>
+            <div class="field"><label>url</label>
+              <input type="text" value="${esc(s.url)}" oninput="updSocial(${i},'url',this.value)" placeholder="https://..."></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn ghost small" onclick="moveSocial(${i},-1)" ${i===0?'disabled':''}>↑</button>
+            <button class="btn ghost small" onclick="moveSocial(${i},1)" ${i===(p.socials.length-1)?'disabled':''}>↓</button>
+            <button class="btn danger small" onclick="deleteSocial(${i})">remove</button>
+          </div></div>`).join('')||'<p class="hint">no links yet.</p>'}
+    </div>`);
+  updateStatus();
+}
+function updProfile(k,v){SITE.profile[k]=v;saveDraft();
+  clearTimeout(updProfile._t);updProfile._t=setTimeout(renderNav,300);}
+function addSocial(){(SITE.profile.socials=SITE.profile.socials||[]).push({label:"",url:""});
+  saveDraft();renderEditProfile();renderNav();}
+function updSocial(i,k,v){SITE.profile.socials[i][k]=v;saveDraft();
+  clearTimeout(updSocial._t);updSocial._t=setTimeout(renderNav,300);}
+function deleteSocial(i){SITE.profile.socials.splice(i,1);saveDraft();renderEditProfile();renderNav();}
+function moveSocial(i,d){const a=SITE.profile.socials,j=i+d;if(j<0||j>=a.length)return;
+  [a[i],a[j]]=[a[j],a[i]];saveDraft();renderEditProfile();renderNav();}
+
+/* ----- design ----- */
+function renderEditDesign(){
+  const t=SITE.theme;
+  document.getElementById('app').innerHTML=edShell('design',`
+    <div class="ed-panel">
+      <h3>color presets</h3>
+      <p class="hint">pick a starting point, then fine-tune. changes apply live.</p>
+      <div class="swatches">${Object.entries(PRESETS).map(([k,p])=>`
+        <div class="swatch ${t.preset===k?'active':''}" onclick="applyPreset('${k}')">
+          <div class="bars"><i style="background:${p.paper}"></i><i style="background:${p.accent}"></i>
+            <i style="background:${p.accent2}"></i><i style="background:${p.ink}"></i></div>
+          <span>${p.label}</span></div>`).join('')}</div>
+    </div>
+    <div class="ed-panel">
+      <h3>fine-tune colors</h3>
+      <div class="color-grid">${[['paper','background'],['ink','text'],['card','cards'],['accent','accent 1'],['accent2','accent 2']]
+        .map(([k,l])=>`<div class="color-field"><input type="color" value="${t[k]}" oninput="updTheme('${k}',this.value)"><label>${l}</label></div>`).join('')}</div>
+    </div>
+    <div class="ed-panel">
+      <h3>fonts</h3>
+      <p class="hint">headings, body text, and the small uppercase labels. preview updates as you pick.</p>
+      <div class="field"><label>heading font</label>
+        <select onchange="updTheme('fontDisplay',this.value)">${FONT_DISPLAY.map(f=>`<option ${t.fontDisplay===f?'selected':''}>${f}</option>`).join('')}</select>
+        <div class="font-preview" style="font-family:'${t.fontDisplay}',serif;font-weight:700">shop this look</div></div>
+      <div class="field"><label>body font</label>
+        <select onchange="updTheme('fontBody',this.value)">${FONT_BODY.map(f=>`<option ${t.fontBody===f?'selected':''}>${f}</option>`).join('')}</select>
+        <div class="font-preview" style="font-family:'${t.fontBody}',sans-serif;font-size:.9em">
+          Woven leather crossbody bag — the exact one from the photo.</div></div>
+      <div class="field"><label>label font</label>
+        <select onchange="updTheme('fontMono',this.value)">${FONT_MONO.map(f=>`<option ${t.fontMono===f?'selected':''}>${f}</option>`).join('')}</select>
+        <div class="font-preview" style="font-family:'${t.fontMono}',monospace;font-size:.72em;text-transform:uppercase;letter-spacing:.06em">
+          6 products · accessories</div></div>
+      <div class="field"><label>overall text size — <span class="range-val" id="valSize">${t.baseSize||16}px</span></label>
+        <input type="range" min="13" max="20" value="${t.baseSize||16}" style="width:100%"
+          oninput="liveTheme('baseSize',parseInt(this.value),'valSize','px')"></div>
+    </div>
+    <div class="ed-panel">
+      <h3>card style</h3>
+      <div class="field"><label>style</label>
+        <select onchange="updTheme('cardStyle',this.value)">
+          ${[['soft','soft shadow'],['flat','flat outline'],['hard','hard offset shadow'],['lifted','deep lifted']]
+            .map(([v,l])=>`<option value="${v}" ${t.cardStyle===v?'selected':''}>${l}</option>`).join('')}</select></div>
+      <div class="field"><label>corner roundness — <span class="range-val" id="valRadius">${t.radius}px</span></label>
+        <input type="range" min="0" max="30" value="${t.radius}" style="width:100%"
+          oninput="liveTheme('radius',parseInt(this.value),'valRadius','px')"></div>
+    </div>
+    <div class="ed-panel">
+      <h3>header layout</h3>
+      <p class="hint">your photo, name, bio, and links all live in the top bar. choose how they sit.</p>
+      <div class="field"><label>alignment</label>
+        <select onchange="updRoot('headerAlign',this.value);renderNav()">
+          <option value="left" ${SITE.headerAlign!=='center'?'selected':''}>left aligned (compact)</option>
+          <option value="center" ${SITE.headerAlign==='center'?'selected':''}>centered</option>
+        </select></div>
+    </div>`);
+  updateStatus();
+}
+/* live slider: update theme + label without re-rendering the panel */
+function liveTheme(k,v,labelId,suffix){
+  SITE.theme[k]=v; SITE.theme.preset='custom';
+  applyTheme();
+  const el=document.getElementById(labelId);
+  if(el) el.textContent=v+(suffix||'');
+  clearTimeout(liveTheme._t);
+  liveTheme._t=setTimeout(saveDraft,250);
+}
+
+function renderEditText(){
+  document.getElementById('app').innerHTML=edShell('text',`
+    <div class="ed-panel">
+      <h3>site text</h3>
+      <div class="field"><label>site name (top left)</label>
+        <input type="text" value="${esc(SITE.siteName)}" oninput="updRoot('siteName',this.value)"></div>
+      <div class="field"><label>collections section heading</label>
+        <input type="text" value="${esc(SITE.tagline)}" oninput="updRoot('tagline',this.value)"></div>
+    </div>
+    <div class="ed-panel">
+      <div class="item-block-head">
+        <h3 style="margin:0">shop categories</h3>
+        <button class="btn small" onclick="addCategory()">+ add category</button></div>
+      <p class="hint">these are the broad groups on your Shop All page — rename, reorder (drag ⠿), or delete them.
+        keep them wide, not vibe-based; your collections already handle the vibes.</p>
+      <div class="cat-row" id="catRow">
+        ${cats().map((c,i)=>`
+          <div class="cat-item" draggable="true" data-i="${i}">
+            <span class="grip">⠿</span>
+            <input type="text" value="${esc(c)}" oninput="renameCategory(${i},this.value)">
+            <button class="btn danger small" onclick="deleteCategory(${i})">✕</button>
+          </div>`).join('')}
+      </div>
+      <div class="btn-row"><button class="btn ghost small" onclick="resetCategories()">reset to defaults</button></div>
+    </div>
+    <div class="ed-panel">
+      <h3>affiliate disclaimer</h3>
+      <p class="hint">appears as a small clickable chip on your profile header, every collection page, every product page, and the footer. clicking opens the full text.</p>
+      <div class="callout"><strong>Keep it clear.</strong> The FTC requires disclosure to be easy to notice and understand.
+        A visible chip on every page meets that well — just don't water the wording down to where someone
+        wouldn't realize you earn money from the links.</div>
+      <div class="field"><label>disclaimer text</label>
+        <textarea style="min-height:110px" oninput="updRoot('disclosure',this.value)">${esc(SITE.disclosure)}</textarea></div>
+      <div class="btn-row">
+        <button class="btn ghost small" onclick="useDisclosure('full')">full wording</button>
+        <button class="btn ghost small" onclick="useDisclosure('short')">short wording</button>
+        <button class="btn ghost small" onclick="openModal()">preview</button></div>
+    </div>`);
+  wireCatDrag(); updateStatus();
+}
+/* ----- category management ----- */
+function addCategory(){
+  SITE.categories=[...cats(),"New category"];
+  saveDraft();renderEditText();renderNav();
+}
+function renameCategory(i,val){
+  const old=SITE.categories[i];
+  SITE.categories[i]=val;
+  /* keep products pointing at the renamed category */
+  SITE.collections.forEach(c=>c.products.forEach(p=>{ if(p.category===old) p.category=val; }));
+  clearTimeout(renameCategory._t);
+  renameCategory._t=setTimeout(()=>{saveDraft();renderNav();},300);
+}
+function deleteCategory(i){
+  const name=SITE.categories[i];
+  const inUse=allProducts().filter(p=>p.category===name).length;
+  if(inUse&&!confirm(`${inUse} product${inUse===1?' is':'s are'} in "${name}". Deleting the category will leave ${inUse===1?'it':'them'} uncategorized. Continue?`))return;
+  SITE.collections.forEach(c=>c.products.forEach(p=>{ if(p.category===name) p.category=""; }));
+  SITE.categories.splice(i,1);
+  saveDraft();renderEditText();renderNav();
+}
+function resetCategories(){
+  if(!confirm("Reset categories back to the defaults?"))return;
+  SITE.categories=[...DEFAULT_SITE.categories];
+  saveDraft();renderEditText();renderNav();
+}
+function wireCatDrag(){
+  const list=document.getElementById('catRow');if(!list)return;
+  let src=null;
+  list.querySelectorAll('.cat-item').forEach(row=>{
+    row.addEventListener('dragstart',e=>{src=+row.dataset.i;row.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+    row.addEventListener('dragend',()=>{row.classList.remove('dragging');
+      list.querySelectorAll('.cat-item').forEach(r=>r.classList.remove('drag-over'));});
+    row.addEventListener('dragover',e=>{e.preventDefault();row.classList.add('drag-over');});
+    row.addEventListener('dragleave',()=>row.classList.remove('drag-over'));
+    row.addEventListener('drop',e=>{e.preventDefault();
+      const t=+row.dataset.i;if(src===null||src===t)return;
+      const a=SITE.categories;const[m]=a.splice(src,1);a.splice(t,0,m);
+      saveDraft();renderEditText();renderNav();toast('order updated');});
+  });
+}
+
+const DISCLOSURES={
+  full:"Some links on this site are affiliate links through the Amazon Associates Program and the eBay Partner Network. If you click one and make a purchase, I may earn a small commission — at no additional cost to you. I only link items I've actually worn or would wear myself.",
+  short:"This site uses affiliate links. If you buy through them, I may earn a small commission at no extra cost to you."
+};
+function useDisclosure(k){SITE.disclosure=DISCLOSURES[k];saveDraft();applyTheme();renderEditText();toast('updated');}
+
+function renderEditPublish(){
+  const c=SITE.publish,tok=getToken();
+  document.getElementById('app').innerHTML=edShell('publish',`
+    <div class="ed-panel">
+      <h3>live publishing</h3>
+      <p class="hint">connect once and you'll never download or re-upload again — hit publish and your live site updates in about 30 seconds.</p>
+      <div class="callout"><strong>How it works:</strong> your content saves to a file called <code>data.json</code> in your GitHub repo,
+        and Netlify rebuilds your site automatically. Your domain never changes. Uploaded images go to an
+        <code>images/</code> folder in the same repo.</div>
+      <ol class="steps">
+        <li>Put this site in a <strong>GitHub repo</strong>, connect that repo to <strong>Netlify</strong> (one-time).</li>
+        <li>GitHub → <strong>Settings → Developer settings → Personal access tokens → Fine-grained</strong>.</li>
+        <li>Create a token with <strong>Contents: Read and write</strong> on just that repo.</li>
+        <li>Fill in below, then publish.</li>
+      </ol>
+      <div class="callout"><strong>About the token:</strong> saved only in this browser, never included in your published site.
+        Treat it like a password. If it leaks, delete it on GitHub and make a new one.</div>
+      <div class="row2">
+        <div class="field"><label>github username</label>
+          <input type="text" value="${esc(c.owner)}" oninput="updPub('owner',this.value)" placeholder="yourusername"></div>
+        <div class="field"><label>repo name</label>
+          <input type="text" value="${esc(c.repo)}" oninput="updPub('repo',this.value)" placeholder="my-shop-site"></div></div>
+      <div class="row2">
+        <div class="field"><label>branch</label>
+          <input type="text" value="${esc(c.branch)}" oninput="updPub('branch',this.value)" placeholder="main"></div>
+        <div class="field"><label>data file path</label>
+          <input type="text" value="${esc(c.path)}" oninput="updPub('path',this.value)" placeholder="data.json"></div></div>
+      <div class="field"><label>access token ${tok?'(saved)':''}</label>
+        <input type="password" value="${esc(tok)}" oninput="setToken(this.value)" placeholder="github_pat_..."></div>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="testConnection()">test connection</button>
+        <button class="btn danger small" onclick="setToken('');renderEditPublish();toast('token cleared')">clear token</button></div>
+    </div>
+    <div class="ed-panel">
+      <h3>not set up yet?</h3>
+      <p class="hint">everything still works — edits save in this browser, and backup downloads your content as a file.</p>
+      <div class="btn-row">
+        <button class="btn ghost" onclick="downloadBackup()">download backup</button>
+        <button class="btn ghost" onclick="document.getElementById('restoreFile').click()">restore from backup</button>
+        <input type="file" id="restoreFile" accept="application/json" style="display:none" onchange="restoreBackup(this)"></div>
+    </div>`);
+  updateStatus();
+}
+function updPub(k,v){SITE.publish[k]=v;saveDraft();}
+
+async function testConnection(){
+  const {owner,repo,branch,path}=SITE.publish,tok=getToken();
+  if(!owner||!repo||!tok){toast('fill in username, repo, and token first');return;}
+  try{
+    const r=await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`,
+      {headers:{Authorization:`Bearer ${tok}`,Accept:'application/vnd.github+json'}});
+    if(r.status===404)toast('connected — data.json will be created on first publish');
+    else if(r.ok)toast('connected and working');
+    else if(r.status===401||r.status===403)toast('token rejected — check permissions');
+    else toast('unexpected response: '+r.status);
+  }catch(e){toast('could not reach github');}
+}
+async function publish(){
+  const {owner,repo,branch,path}=SITE.publish,tok=getToken();
+  if(!owner||!repo||!tok){toast('set up publishing first');navigate('#/edit/publish');return;}
+  const btn=document.getElementById('pubBtn');
+  if(btn){btn.disabled=true;btn.textContent='publishing...';}
+  try{
+    const url=`https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    let sha=null;
+    const cur=await fetch(`${url}?ref=${branch}`,{headers:{Authorization:`Bearer ${tok}`,Accept:'application/vnd.github+json'}});
+    if(cur.ok)sha=(await cur.json()).sha;
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify(SITE,null,2))));
+    const res=await fetch(url,{method:'PUT',
+      headers:{Authorization:`Bearer ${tok}`,Accept:'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:`update site — ${new Date().toLocaleString()}`,content,branch,...(sha?{sha}:{})})});
+    if(res.ok){dirty=false;try{localStorage.removeItem(DRAFT_KEY);}catch(e){}toast('published — live in ~30 seconds');}
+    else{const e=await res.json().catch(()=>({}));toast('publish failed: '+(e.message||res.status));}
+  }catch(e){toast('publish failed — check your connection');}
+  if(btn){btn.disabled=false;btn.textContent='publish changes';}
+  updateStatus();
+}
+
+function upd(path,val){const p=path.split('.');let o=SITE;
+  for(let i=0;i<p.length-1;i++)o=o[p[i]];o[p[p.length-1]]=val;saveDraft();}
+function updRoot(k,v){SITE[k]=v;saveDraft();applyTheme();}
+function updTheme(k,v){SITE.theme[k]=v;SITE.theme.preset='custom';saveDraft();applyTheme();
+  if(k==='radius'||k==='cardStyle'||k==='baseSize'||k.startsWith('font'))renderEditDesign();}
+function applyPreset(k){Object.assign(SITE.theme,PRESETS[k]);delete SITE.theme.label;SITE.theme.preset=k;
+  saveDraft();applyTheme();renderEditDesign();toast('palette applied');}
+
+function addCollection(){
+  const id="col-"+Date.now().toString(36);
+  SITE.collections.push({id,title:"new collection",cover:"",description:"",products:[]});
+  saveDraft();navigate('#/edit/collection/'+id);toast('collection added');
+}
+function deleteCollection(i){if(!confirm("Delete this collection and all its products?"))return;
+  SITE.collections.splice(i,1);saveDraft();renderNav();renderEditCollections();toast('deleted');}
+function addProduct(ci){
+  SITE.collections[ci].products.push({id:"item-"+Date.now().toString(36),name:"New product",
+    price:"",category:"",image:"",description:"",link:""});
+  saveDraft();renderEditCollection(SITE.collections[ci].id);toast('product added');}
+function deleteProduct(ci,pi){if(!confirm("Delete this product?"))return;
+  SITE.collections[ci].products.splice(pi,1);saveDraft();renderNav();renderEditCollection(SITE.collections[ci].id);}
+function moveProduct(ci,pi,d){const a=SITE.collections[ci].products,j=pi+d;
+  if(j<0||j>=a.length)return;[a[pi],a[j]]=[a[j],a[pi]];saveDraft();renderEditCollection(SITE.collections[ci].id);}
+
+function download(fn,txt,type){const b=new Blob([txt],{type:type||'text/plain'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();
+  document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+function downloadBackup(){download('data.json',JSON.stringify(SITE,null,2),'application/json');toast('backup downloaded');}
+function restoreBackup(input){const f=input.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{SITE=deepMerge(structuredClone(DEFAULT_SITE),JSON.parse(r.result));
+    saveDraft();applyTheme();renderNav();router();toast('backup restored');}
+    catch(e){toast('could not read that file');}};
+  r.readAsText(f);}
+
+function router(){
+  const p=(location.hash||'#/').replace(/^#\/?/,'').split('/').filter(Boolean);
+  if(p[0]==='edit'){
+    if(p[1]==='collection'&&p[2])renderEditCollection(p[2]);
+    else if(p[1]==='profile')renderEditProfile();
+    else if(p[1]==='design')renderEditDesign();
+    else if(p[1]==='text')renderEditText();
+    else if(p[1]==='publish')renderEditPublish();
+    else renderEditCollections();
+  }
+  else if(p[0]==='shop')renderShop(p[1]?decodeURIComponent(p[1]):null);
+  else if(p[0]==='collection'&&p[1])renderCollection(p[1]);
+  else if(p[0]==='product'&&p[1]&&p[2])renderProduct(p[1],p[2]);
+  else renderHome();
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',router);
+boot();
+</script>
+</body>
+</html>
