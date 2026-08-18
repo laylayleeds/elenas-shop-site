@@ -48,5 +48,113 @@
     "radius": 18,
     "cardStyle": "soft"
   },
-  "collections": []
+  "collections": [
+    {
+      "id": "col-msy86e0i",
+      "title": "shop this look: boho outfit",
+      "cover": "images/img-msy878d5-j8fbk.jpg",
+      "description": "",
+      "products": [
+        {
+          "id": "item-msy87h39",
+          "name": "Verdusa Women's Ruched Crop Top",
+          "price": "$24",
+          "category": "Clothing",
+          "image": "images/img-msy89c21-6o1ys.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/Verdusa-Shirred-Vacation-Outfits-3X-Large/dp/B0FL1LQY58?pd_rd_w=3gbzv&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=Z75HRJH8V2QNQFAN8SDS&pd_rd_wg=8vL9X&pd_rd_r=56&th=1&psc=1&linkCode=ll2&tag=myinspo09e-20&linkId=73a6ae791246c3ff72ed1ecc58cefc79&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy89vuf",
+          "name": "Women's Low Waist Denim Mini Shorts",
+          "price": "$36",
+          "category": "Clothing",
+          "image": "images/img-msy8bywl-9t8g2.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/Floerns-Womens-Shorts-Pocket-Stretchy/dp/B0F93T2FF6?pd_rd_w=5fQ3h&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=NVZXN6FTGBMN6P9FXVWY&pd_rd_wg=FWtAZ&pd_rd_r=19162e&th=1&psc=1&linkCode=ll2&tag=myinspo09e-20&linkId=6655da42b94ad1bce133a34d3faf3a34&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8clvl",
+          "name": "Steve Madden Rocky Boot",
+          "price": "$159",
+          "category": "Shoes",
+          "image": "images/img-msy8ducs-js985.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/Steve-Madden-Rocky-Brown-Distressed/dp/B0BZL1XL76?pd_rd_w=Y9k7M&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=BJ3KFP1320XA4HMKT95M&pd_rd_wg=O8Nfq&pd_rd_r=ebd3f771&th=1&psc=1&linkCode=ll2&tag=myinspo09e-20&linkId=8c2281129a01ea8acd8db0b79cc20317&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8qe86",
+          "name": "Crossbody City Bag",
+          "price": "$40",
+          "category": "Accessories",
+          "image": "images/img-msy8rj2d-3oe16.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/JOLLQUE-CrossbodyCity-Leather-Handbag-Shoulder/dp/B0F2G9MHYZ?pd_rd_w=qzyas&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=0R696G4KY73R8B8V9HTY&pd_rd_wg=mzV39&pd_rd=&linkCode=ll2&tag=myinspo09e-20&linkId=e42e0a886fc1b25b629570183d34d491&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8eh7o",
+          "name": "Plated Waist Chain Jewelry",
+          "price": "$8",
+          "category": "Accessories",
+          "image": "images/img-msy8fhae-1zzst.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/Heclia-Satellite-Adjustable-Waterproof-Accessories/dp/B0F3DBD174?pd_rd_w=LByjB&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=MS8GHDZ7J487XX7HP1DW&pd_rd_wg=HHsfZ&p=undefined&linkCode=ll2&tag=myinspo09e-20&linkId=156383a163cf12405d9529de6cfc68f0&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8g5u2",
+          "name": "Lace Boho Tie Front Top",
+          "price": "$30",
+          "category": "Clothing",
+          "image": "images/img-msy8hn0g-kulyw.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/Peplum-Western-Shirts-Ruffle-Peasant/dp/B0F6NJRMBT?pd_rd_w=RzvrS&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=YDZ4F3JHRNAYD24D5ZPA&pd_rd_wg=SSbjY&pd_rd_r=aedeca9&th=1&psc=1&linkCode=ll2&tag=myinspo09e-20&linkId=1241679a6a949428f04969ba727d8d69&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8iael",
+          "name": "Women's Cargo Shorts",
+          "price": "$15",
+          "category": "Clothing",
+          "image": "images/img-msy8kccl-c9oye.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/Womens-Cargo-Shorts-Elastic-Pockets/dp/B0F7RHPTXH?pd_rd_w=rZgKz&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=SKDNK9V6NYTY84CKPM1Y&pd_rd_wg=ZqXvA&pd_rd_r=2cca8b4a&th=1&psc=1&linkCode=ll2&tag=myinspo09e-20&linkId=996176c7b72dd85ced710ae4b3fbe8a6&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8kwlt",
+          "name": "Women's Brown Knee High Boots",
+          "price": "$49",
+          "category": "Shoes",
+          "image": "images/img-msy8n10z-w0nwb.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/DREAM-PAIRS-Platform-Comfortable-DWUMKB2516/dp/B0FDB58W1V?pd_rd_w=Ouip5&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=K4CCRMP58ZAQHAT2QF9P&pd_rd_wg=I28FL&pd_rd_r=&th=1&psc=1&linkCode=ll2&tag=myinspo09e-20&linkId=6dd60f7da0fda59e4de71df183e5b041&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8nm5e",
+          "name": "Brown Belt With Gold Buckle",
+          "price": "$36",
+          "category": "Shoes",
+          "image": "images/img-msy8pqvu-d6a3z.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/RISANTRY-Genuine-Leather-Smooth-Fashion/dp/B0CRQXW214?pd_rd_w=P1oxV&content-id=amzn1.sym.f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_p=f5690a4d-f2bb-45d9-9d1b-736fee412437&pf_rd_r=PGAM0DVKYJYEH86JMKT1&pd_rd_wg=ciWeU&pd_rd_r=d519&th=1&psc=1&linkCode=ll2&tag=myinspo09e-20&linkId=06484dddad4bb61f37cfdba8a0997424&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8rquo",
+          "name": "Brown Woven Shoulder Bag",
+          "price": "$40",
+          "category": "Accessories",
+          "image": "images/img-msy8snw4-buyb0.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/dp/B0H1DGT6MT?pd_rd_i=B0H1DGT6MT&pd_rd_w=cbbRy&content-id=amzn1.sym.4a7f44df-467c-45a1-af5f-91661a6df2f9&pf_rd_p=4a7f44df-467c-45a1-af5f-91661a6df2f9&pf_rd_r=A4ZHNVVYTAQJ066H5RJD&pd_rd_wg=xjqdv&pd_rd_r=b9af7539-e89b-44a0-8853-f&th=1&linkCode=ll2&tag=myinspo09e-20&linkId=855a8f691a83f32e9a4bcafbffdea629&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        },
+        {
+          "id": "item-msy8tx2e",
+          "name": "Large Gold Pendant Necklace",
+          "price": "$10",
+          "category": "Accessories",
+          "image": "images/img-msy8ubbi-jmqri.jpg",
+          "description": "",
+          "link": "https://www.amazon.com/dp/B0F59HC7BL?pd_rd_i=B0F59HC7BL&pd_rd_w=nBok5&content-id=amzn1.sym.4a7f44df-467c-45a1-af5f-91661a6df2f9&pf_rd_p=4a7f44df-467c-45a1-af5f-91661a6df2f9&pf_rd_r=DME7CJYTXVPT7HY7F5FN&pd_rd_wg=EvNXu&pd_rd_r=22a32bd8-3dfc-4bb1-a59f-5&th=1&linkCode=ll2&tag=myinspo09e-20&linkId=570872f0473fa13ae307fcc8184e32aa&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl"
+        }
+      ]
+    }
+  ]
 }
