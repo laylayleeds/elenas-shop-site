@@ -421,7 +421,7 @@ function isAuthed(){
   try{ return localStorage.getItem(AUTH_KEY)===SITE.editAuth.passHash; }catch(e){ return false; }
 }
 function setAuthed(hash){ try{ localStorage.setItem(AUTH_KEY,hash); }catch(e){} }
-function logout(){ try{ localStorage.removeItem(AUTH_KEY); }catch(e){} navigate('#/'); toast('logged out'); }
+function logout(){ try{ localStorage.removeItem(AUTH_KEY); }catch(e){} navigate('#/'); renderNav(); toast('logged out'); }
 function renderLoginGate(){
   document.getElementById('app').innerHTML=`
     <div style="max-width:380px;margin:60px auto;background:var(--card);border-radius:var(--radius);
@@ -441,7 +441,7 @@ function renderLoginGate(){
 async function tryLogin(){
   const val=document.getElementById('loginPass').value;
   const hash=await sha256(val);
-  if(hash===SITE.editAuth.passHash){ setAuthed(hash); router(); }
+  if(hash===SITE.editAuth.passHash){ setAuthed(hash); renderNav(); router(); }
   else{ document.getElementById('loginErr').style.display='block'; }
 }
 function renderSetupPassword(){
@@ -470,6 +470,7 @@ async function trySetup(){
   SITE.editAuth={passHash:hash};
   setAuthed(hash);
   saveDraft();
+  renderNav();
   toast('password set — remember to hit "publish changes" so it applies everywhere, not just this browser');
   router();
 }
@@ -537,7 +538,7 @@ function renderNav(){
           ${used.map(c=>`<a onclick="navigate('#/shop/${encodeURIComponent(c)}')">${esc(c)}</a>`).join('')}
         </div>
       </div>
-      <button class="pill solid" onclick="navigate('#/edit')">edit</button>
+      ${isAuthed()?`<button class="pill solid" onclick="navigate('#/edit')">edit</button>`:''}
     </div>`;
 }
 function toggleDD(e){e.stopPropagation();const d=document.getElementById('shopDD');
