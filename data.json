@@ -1,0 +1,52 @@
+{
+  "siteName": "Shop",
+  "headerAlign": "left",
+  "categories": [
+    "Clothing",
+    "Shoes",
+    "Accessories",
+    "Beauty & Health",
+    "Home",
+    "Tech",
+    "Media",
+    "Other"
+  ],
+  "profile": {
+    "name": "Elena's Storefront ",
+    "bio": "fashion + lifestyle. everything i post linked to purchase",
+    "pic": "",
+    "socials": [
+      {
+        "label": "Pinterest",
+        "url": "https://pin.it/6YL8aBNIx"
+      }
+    ]
+  },
+  "tagline": "Shop My Collections",
+  "intro": "everything i've posted, linked and organized.",
+  "disclosure": "Links on this site are affiliate links through the Amazon Associates Program. If you click one and make a purchase, I may earn a small commission at no additional cost to you. ",
+  "publish": {
+    "owner": "laylayleeds",
+    "repo": "elenas-shop-site",
+    "branch": "main",
+    "path": "data.json"
+  },
+  "editAuth": {
+    "passHash": "7153f90c05b10a23c6b218f87980f1b125ea706c98397721aa65ba7788120fc2"
+  },
+  "theme": {
+    "preset": "custom",
+    "paper": "#E8EAEA",
+    "ink": "#232A30",
+    "card": "#F8F9F9",
+    "accent": "#5F7C8A",
+    "accent2": "#A08894",
+    "fontDisplay": "Libre Baskerville",
+    "fontBody": "Lora",
+    "fontMono": "Space Grotesk",
+    "baseSize": 16,
+    "radius": 18,
+    "cardStyle": "soft"
+  },
+  "collections": []
+}
