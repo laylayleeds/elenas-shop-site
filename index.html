@@ -316,6 +316,7 @@ const DEFAULT_SITE = {
   intro: "everything i've posted, linked and organized.",
   disclosure: "Some links on this site are affiliate links through the Amazon Associates Program and the eBay Partner Network. If you click one and make a purchase, I may earn a small commission — at no additional cost to you. I only link items I've actually worn or would wear myself.",
   publish: { owner:"", repo:"", branch:"main", path:"data.json" },
+  editAuth: { passHash:"" },
   theme: {
     preset:"thrift", paper:"#ECE4D3", ink:"#221D17", card:"#FFFFFF",
     accent:"#9C3B2A", accent2:"#5C6640",
@@ -390,6 +391,7 @@ const FONT_MONO=["Space Mono","Courier Prime","IBM Plex Mono","JetBrains Mono","
 
 const DRAFT_KEY="shopSite_draft_v3";
 const TOKEN_KEY="shopSite_token";
+const AUTH_KEY="shopSite_authed_v1";
 let SITE=structuredClone(DEFAULT_SITE);
 let dirty=false, ddOpen=null;
 
@@ -409,6 +411,68 @@ function toast(m){const t=document.getElementById('toast');t.textContent=m;t.cla
   clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),2800);}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function navigate(h){window.location.hash=h;closeDD();}
+
+/* ---------- edit-password auth ---------- */
+async function sha256(str){
+  const buf=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function isAuthed(){
+  try{ return localStorage.getItem(AUTH_KEY)===SITE.editAuth.passHash; }catch(e){ return false; }
+}
+function setAuthed(hash){ try{ localStorage.setItem(AUTH_KEY,hash); }catch(e){} }
+function logout(){ try{ localStorage.removeItem(AUTH_KEY); }catch(e){} navigate('#/'); toast('logged out'); }
+function renderLoginGate(){
+  document.getElementById('app').innerHTML=`
+    <div style="max-width:380px;margin:60px auto;background:var(--card);border-radius:var(--radius);
+      padding:28px;box-shadow:var(--shadow);border:var(--card-border)">
+      <h3 style="font-family:var(--font-display);margin:0 0 6px;font-size:1.15em">this area is private</h3>
+      <p style="font-size:.82em;color:var(--ink-soft);line-height:1.6;margin:0 0 16px">
+        enter your password to edit this site.</p>
+      <div class="field"><label>password</label>
+        <input type="password" id="loginPass" placeholder="••••••••"
+          onkeydown="if(event.key==='Enter')tryLogin()"></div>
+      <div id="loginErr" style="font-size:.76em;color:#A33;margin-bottom:10px;display:none">incorrect password</div>
+      <button class="btn" onclick="tryLogin()">unlock</button>
+      <button class="btn ghost" style="margin-left:8px" onclick="navigate('#/')">cancel</button>
+    </div>`;
+  document.getElementById('loginPass').focus();
+}
+async function tryLogin(){
+  const val=document.getElementById('loginPass').value;
+  const hash=await sha256(val);
+  if(hash===SITE.editAuth.passHash){ setAuthed(hash); router(); }
+  else{ document.getElementById('loginErr').style.display='block'; }
+}
+function renderSetupPassword(){
+  document.getElementById('app').innerHTML=`
+    <div style="max-width:420px;margin:60px auto;background:var(--card);border-radius:var(--radius);
+      padding:28px;box-shadow:var(--shadow);border:var(--card-border)">
+      <h3 style="font-family:var(--font-display);margin:0 0 6px;font-size:1.15em">set up an edit password</h3>
+      <p style="font-size:.82em;color:var(--ink-soft);line-height:1.6;margin:0 0 16px">
+        no password is set yet, so right now anyone who finds this page could open the editor.
+        set one now, then hit "publish changes" afterward so it applies everywhere — not just this browser.</p>
+      <div class="field"><label>new password</label>
+        <input type="password" id="setupPass1" placeholder="choose a password"></div>
+      <div class="field"><label>confirm password</label>
+        <input type="password" id="setupPass2" placeholder="re-enter it"
+          onkeydown="if(event.key==='Enter')trySetup()"></div>
+      <div id="setupErr" style="font-size:.76em;color:#A33;margin-bottom:10px;display:none"></div>
+      <button class="btn" onclick="trySetup()">set password &amp; continue</button>
+    </div>`;
+}
+async function trySetup(){
+  const a=document.getElementById('setupPass1').value, b=document.getElementById('setupPass2').value;
+  const err=document.getElementById('setupErr');
+  if(a.length<6){ err.textContent='use at least 6 characters'; err.style.display='block'; return; }
+  if(a!==b){ err.textContent="passwords don't match"; err.style.display='block'; return; }
+  const hash=await sha256(a);
+  SITE.editAuth={passHash:hash};
+  setAuthed(hash);
+  saveDraft();
+  toast('password set — remember to hit "publish changes" so it applies everywhere, not just this browser');
+  router();
+}
 
 function applyTheme(){
   const t=SITE.theme,r=document.documentElement.style;
@@ -680,6 +744,7 @@ function edShell(tab,body){
         <button class="ed-tab ${tab==='text'?'active':''}" onclick="navigate('#/edit/text')">site text</button>
         <button class="ed-tab ${tab==='publish'?'active':''}" onclick="navigate('#/edit/publish')">publish</button>
         <button class="ed-tab" onclick="navigate('#/')">← view site</button>
+        <button class="ed-tab" style="margin-left:auto" onclick="logout()">log out</button>
       </div>${body}</div>
     <div class="save-bar">
       <span class="save-status" id="saveStatus"></span>
@@ -1048,6 +1113,19 @@ function renderEditPublish(){
         <button class="btn danger small" onclick="setToken('');renderEditPublish();toast('token cleared')">clear token</button></div>
     </div>
     <div class="ed-panel">
+      <h3>edit password</h3>
+      <p class="hint">protects the editor on this site. after changing it, hit "publish changes" below so it takes effect everywhere, not just this browser.</p>
+      <div class="field"><label>current password</label>
+        <input type="password" id="curPass" placeholder="current password"></div>
+      <div class="row2">
+        <div class="field"><label>new password</label>
+          <input type="password" id="newPass1" placeholder="new password"></div>
+        <div class="field"><label>confirm new password</label>
+          <input type="password" id="newPass2" placeholder="confirm new password"></div>
+      </div>
+      <div class="btn-row"><button class="btn ghost" onclick="changePassword()">update password</button></div>
+    </div>
+    <div class="ed-panel">
       <h3>not set up yet?</h3>
       <p class="hint">everything still works — edits save in this browser, and backup downloads your content as a file.</p>
       <div class="btn-row">
@@ -1058,6 +1136,21 @@ function renderEditPublish(){
   updateStatus();
 }
 function updPub(k,v){SITE.publish[k]=v;saveDraft();}
+async function changePassword(){
+  const cur=document.getElementById('curPass').value;
+  const n1=document.getElementById('newPass1').value;
+  const n2=document.getElementById('newPass2').value;
+  const curHash=await sha256(cur);
+  if(curHash!==SITE.editAuth.passHash){ toast('current password is incorrect'); return; }
+  if(n1.length<6){ toast('new password must be at least 6 characters'); return; }
+  if(n1!==n2){ toast("new passwords don't match"); return; }
+  const newHash=await sha256(n1);
+  SITE.editAuth.passHash=newHash;
+  setAuthed(newHash);
+  saveDraft();
+  toast('password updated — publish to apply everywhere');
+  renderEditPublish();
+}
 
 async function testConnection(){
   const {owner,repo,branch,path}=SITE.publish,tok=getToken();
@@ -1129,6 +1222,9 @@ function restoreBackup(input){const f=input.files[0];if(!f)return;const r=new Fi
 function router(){
   const p=(location.hash||'#/').replace(/^#\/?/,'').split('/').filter(Boolean);
   if(p[0]==='edit'){
+    const hasPass=SITE.editAuth&&SITE.editAuth.passHash;
+    if(!hasPass){ renderSetupPassword(); window.scrollTo(0,0); return; }
+    if(!isAuthed()){ renderLoginGate(); window.scrollTo(0,0); return; }
     if(p[1]==='collection'&&p[2])renderEditCollection(p[2]);
     else if(p[1]==='profile')renderEditProfile();
     else if(p[1]==='design')renderEditDesign();
