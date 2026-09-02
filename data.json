@@ -226,13 +226,13 @@
           "link": "https://amzn.to/4x3elhO"
         },
         {
-          "id": "item-mtjsb2dt",
+          "id": "item-mtjs8oza",
           "name": "Crossbody City Bag",
           "price": "$40",
           "category": "Accessories",
-          "image": "images/img-mtjsbblb-2nuxj.jpg",
+          "image": "images/img-mtjs9hqo-nvjmn.jpg",
           "description": "",
-          "link": "https://amzn.to/4y7xTm2"
+          "link": "https://amzn.to/3V6QXlY"
         }
       ]
     },
@@ -289,10 +289,20 @@
     },
     {
       "id": "col-msyui39n",
-      "title": "shop this look: black widow halloween costume",
-      "cover": "<a href='https://postimg.cc/2LfPrcsF' target='_blank'><img src='https://i.postimg.cc/C5ZYC9Jt/95be3699-0de5-47b1-b7d4-5b19acb5aca5-imcv2.jpg' border='0' alt='95be3699-0de5-47b1-b7d4-5b19acb5aca5-imcv2'></a>",
+      "title": "shop this look: scarlet witch halloween costume",
+      "cover": "images/img-mtjsdtg2-h5w7q.jpg",
       "description": "",
-      "products": []
+      "products": [
+        {
+          "id": "item-mtjsg7n6",
+          "name": "Mid Calf Lace Up Boots",
+          "price": "$50",
+          "category": "Shoes",
+          "image": "images/img-mtjsgvjh-ykd9i.jpg",
+          "description": "",
+          "link": "https://amzn.to/4coP3mR"
+        }
+      ]
     }
   ]
 }
