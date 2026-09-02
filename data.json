@@ -301,6 +301,24 @@
           "image": "images/img-mtjsgvjh-ykd9i.jpg",
           "description": "",
           "link": "https://amzn.to/4coP3mR"
+        },
+        {
+          "id": "item-mtjsgz6u",
+          "name": "Women's Red Knee High Boots",
+          "price": "$20",
+          "category": "Shoes",
+          "image": "images/img-mtjsi0ng-p79t2.jpg",
+          "description": "",
+          "link": "https://amzn.to/3Uw96JP"
+        },
+        {
+          "id": "item-mtjsh8tl",
+          "name": "Lace Hooded Cape",
+          "price": "$24",
+          "category": "Accessories",
+          "image": "images/img-mtjsj2y1-ddy90.jpg",
+          "description": "",
+          "link": "https://amzn.to/4zSjqfq"
         }
       ]
     }
