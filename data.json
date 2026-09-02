@@ -165,7 +165,7 @@
         {
           "id": "item-mtjrr2pf",
           "name": "Cheetah Print Pants",
-          "price": "33",
+          "price": "$33",
           "category": "Clothing",
           "image": "images/img-mtjrs0dl-jk9k1.jpg",
           "description": "",
@@ -179,6 +179,15 @@
           "image": "images/img-mtjrsyly-nw45z.jpg",
           "description": "",
           "link": "https://amzn.to/462tAMN"
+        },
+        {
+          "id": "item-mtjrtszd",
+          "name": "Dr. Martens",
+          "price": "$135",
+          "category": "Shoes",
+          "image": "images/img-mtjruvf6-4chve.jpg",
+          "description": "",
+          "link": "https://amzn.to/4x3a2mq"
         }
       ]
     },
