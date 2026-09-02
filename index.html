@@ -670,8 +670,8 @@ function renderProduct(cid,pid){
 }
 function notFound(){document.getElementById('app').innerHTML=
   `<p class="empty">Not found. <a onclick="navigate('#/')" style="cursor:pointer;text-decoration:underline">Go home</a></p>`;}
-function copyLink(hash){
-  const url=location.origin+location.pathname+hash;
+function copyLink(target){
+  const url = target.startsWith('#') ? location.origin+location.pathname+target : location.origin+target;
   navigator.clipboard.writeText(url).then(()=>toast('link copied')).catch(()=>toast(url));
 }
 
@@ -867,9 +867,9 @@ function renderEditCollection(id){
             <input type="text" value="${esc(p.link)}" oninput="upd('collections.${ci}.products.${pi}.link',this.value)" placeholder="https://amzn.to/..."></div>
           <div class="field"><label>description</label>
             <textarea oninput="upd('collections.${ci}.products.${pi}.description',this.value)">${esc(p.description)}</textarea></div>
-          <div class="field"><label>direct link to this product</label>
-            <div class="link-preview">${location.origin+location.pathname}#/product/${c.id}/${p.id}</div>
-            <div class="btn-row"><button class="btn ghost small" onclick="copyLink('#/product/${c.id}/${p.id}')">copy link</button></div></div>
+          <div class="field"><label>direct link to this product <span style="text-transform:none;font-weight:400">(paste this one into Pinterest)</span></label>
+            <div class="link-preview">${location.origin}/product/${c.id}/${p.id}/</div>
+            <div class="btn-row"><button class="btn ghost small" onclick="copyLink('/product/${c.id}/${p.id}/')">copy link</button></div></div>
         </div>`).join('')||'<p class="hint">no products yet.</p>'}
     </div>`);
   updateStatus();
