@@ -161,7 +161,26 @@
       "title": "shop this look: indie outfits",
       "cover": "images/img-msy93ynz-xyun0.jpg",
       "description": "",
-      "products": []
+      "products": [
+        {
+          "id": "item-mtjrjc8e",
+          "name": "Printed Dark Wash Baggy Jeans",
+          "price": "$39",
+          "category": "Clothing",
+          "image": "images/img-mtjrjzy2-dxzvd.jpg",
+          "description": "",
+          "link": "https://amzn.to/4xdDGWs"
+        },
+        {
+          "id": "item-mtjrkayc",
+          "name": "New product",
+          "price": "",
+          "category": "",
+          "image": "",
+          "description": "",
+          "link": ""
+        }
+      ]
     },
     {
       "id": "col-msy94dno",
@@ -170,40 +189,13 @@
       "description": "",
       "products": [
         {
-          "id": "item-mtjrlcjk",
+          "id": "item-mtjroisj",
           "name": "Printed Dark Wash Baggy Jeans",
           "price": "39",
           "category": "Clothing",
-          "image": "images/img-mtjrlqbi-xhu3x.jpg",
+          "image": "images/img-mtjrozem-rixwy.jpg",
           "description": "",
-          "link": "https://amzn.to/46AcMNh"
-        },
-        {
-          "id": "item-mtjrlwjj",
-          "name": "Black Scoop Neck Long Sleeve Top",
-          "price": "15",
-          "category": "Clothing",
-          "image": "images/img-mtjrme55-k7nj3.jpg",
-          "description": "",
-          "link": "https://amzn.to/3Ss6Brr"
-        },
-        {
-          "id": "item-mtjrmklq",
-          "name": "Studded Belt",
-          "price": "8",
-          "category": "Accessories",
-          "image": "images/img-mtjrn6hi-roqrw.jpg",
-          "description": "",
-          "link": "https://amzn.to/4gOAMRK"
-        },
-        {
-          "id": "item-mtjrncbe",
-          "name": "Skull Ring",
-          "price": "10",
-          "category": "Accessories",
-          "image": "images/img-mtjrnr75-un86v.jpg",
-          "description": "",
-          "link": "https://amzn.to/4zQ9nr1"
+          "link": "https://amzn.to/3T82ile"
         }
       ]
     },
