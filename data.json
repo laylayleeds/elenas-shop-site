@@ -319,6 +319,42 @@
           "image": "images/img-mtjsj2y1-ddy90.jpg",
           "description": "",
           "link": "https://amzn.to/4zSjqfq"
+        },
+        {
+          "id": "item-mtjsj7b3",
+          "name": "Chiffon Hooded Cloak",
+          "price": "$33",
+          "category": "Accessories",
+          "image": "images/img-mtjsk5dt-hv13n.jpg",
+          "description": "",
+          "link": "https://amzn.to/4h6hWGU"
+        },
+        {
+          "id": "item-mtjsk99b",
+          "name": "Copper Red Wig ",
+          "price": "$41",
+          "category": "Accessories",
+          "image": "images/img-mtjslcwh-ftneb.jpg",
+          "description": "",
+          "link": "https://amzn.to/4zPhK6j"
+        },
+        {
+          "id": "item-mtjslfc4",
+          "name": "Fingerless Lace Gloves",
+          "price": "$7",
+          "category": "Accessories",
+          "image": "images/img-mtjsmfou-ho34c.jpg",
+          "description": "",
+          "link": "https://amzn.to/4xIVp95"
+        },
+        {
+          "id": "item-mtjsmsr9",
+          "name": "Red Corset Top",
+          "price": "$29",
+          "category": "Clothing",
+          "image": "images/img-mtjsnmk0-tv4t2.jpg",
+          "description": "",
+          "link": "https://amzn.to/4qSqdBR"
         }
       ]
     }
