@@ -355,6 +355,24 @@
           "image": "images/img-mtjsnmk0-tv4t2.jpg",
           "description": "",
           "link": "https://amzn.to/4qSqdBR"
+        },
+        {
+          "id": "item-mtjsnsa0",
+          "name": "Women's Faux Leather Open Back Bodysuit",
+          "price": "$30",
+          "category": "Clothing",
+          "image": "images/img-mtjsoo9p-3dgu0.jpg",
+          "description": "",
+          "link": "https://amzn.to/4gFvaJh"
+        },
+        {
+          "id": "item-mtjsottt",
+          "name": "Wanda Maximoff Costume",
+          "price": "$86",
+          "category": "Clothing",
+          "image": "images/img-mtjspo1b-mjxei.jpg",
+          "description": "",
+          "link": "https://amzn.to/4qRVvIU"
         }
       ]
     }
