@@ -182,12 +182,21 @@
         },
         {
           "id": "item-mtjrtszd",
-          "name": "Dr. Martens",
+          "name": "Doc Martens",
           "price": "$135",
           "category": "Shoes",
           "image": "images/img-mtjruvf6-4chve.jpg",
           "description": "",
           "link": "https://amzn.to/4x3a2mq"
+        },
+        {
+          "id": "item-mtjrvjgx",
+          "name": "Black Buckled Purse",
+          "price": "$17",
+          "category": "Accessories",
+          "image": "images/img-mtjrw5l9-36b9f.jpg",
+          "description": "",
+          "link": "https://amzn.to/4d9sLWf"
         }
       ]
     },
